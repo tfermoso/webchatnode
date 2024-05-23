@@ -18,7 +18,10 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static('public'));
 
 app.get("/login", (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'login.html'));
+    //res.sendFile(path.join(__dirname, 'public', 'login.html'));
+    let error="";
+    res.render('login',{error});
+
 })
 
 app.post("/login", (req, res) => {
@@ -26,7 +29,8 @@ app.post("/login", (req, res) => {
     if(email=="admin@gmail.com" & password=="1234"){
         res.redirect("/juego");
     }else{
-        res.sendFile(path.join(__dirname, 'public', 'login.html'));
+        res.render('login', { error: 'Usuario o password incorrecta'});
+
     }
 })
 
