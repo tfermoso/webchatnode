@@ -15,6 +15,11 @@ app.get("/login",(req,res)=>{
     res.sendFile(path.join(__dirname, 'public', 'login.html'));
 })
 
+app.post("/login",(req,res)=>{
+    console.log(req);
+    res.send("procesando login");
+})
+
 server.listen(PORT, () => {
     console.log(`Servidor escuchando en el puerto ${PORT}`);
 });
