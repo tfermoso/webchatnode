@@ -1,0 +1,15 @@
+{
+  "name": "chatweb",
+  "version": "1.0.0",
+  "description": "Chat con socket.io",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tomas",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "socket.io": "^4.7.5"
+  }
+}
