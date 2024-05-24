@@ -47,18 +47,19 @@ app.post("/login", (req, res) => {
 app.get("/juego", (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'juego.html'));
 })
+app.get("/register",(req,res)=>{
+    let error="";
+    res.render("register",{error}); 
+})
 
-app.get("/newuser", async (req, res) => {
-    let name = "Lolo2";
-    let email = "lolo2@gmail.com";
-    let password = "1234";
+app.post("/register", async (req, res) => {
+    const {name,email,password}=req.body;
     let usuario = new User({ name, email, password });
     try {
         usuario.save();
-        res.send("Usuario grabado " + usuario.name);
-    } catch (error) {
-        console.log(error);
-        res.send("error");
+        res.redirect("/login");
+    } catch (error) {      
+        res.render("register",{error});
     }
 })
 
