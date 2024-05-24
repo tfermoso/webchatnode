@@ -1,0 +1,29 @@
+[{
+  "_id": {
+    "$oid": "6650a5302d35f7dde4be360d"
+  },
+  "name": "Juan",
+  "email": "juan@gmail.com"
+},
+{
+  "_id": {
+    "$oid": "6650a6222d35f7dde4be360e"
+  },
+  "name": "Pepe",
+  "email": "pepe@gmail.com",
+  "edad": 34
+},
+{
+  "_id": {
+    "$oid": "6650a7e72d35f7dde4be360f"
+  },
+  "name": "Maria",
+  "email": "maria@gmail.com"
+},
+{
+  "_id": {
+    "$oid": "6650a7e72d35f7dde4be3610"
+  },
+  "name": "Lucia",
+  "email": "lucia@gmail.com"
+}]
