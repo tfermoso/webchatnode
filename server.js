@@ -6,7 +6,7 @@ const mongoose = require("mongoose")
 const User = require('./models/user');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
-const isAuthenticated = require('./middleware/auth');
+const isAuthenticated = require('./middleware/authenticated');
 
 const PORT = process.env.PORT || 3000;
 
