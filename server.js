@@ -4,6 +4,8 @@ const socketIo = require('socket.io');
 const path = require('path');
 const mongoose = require("mongoose")
 const User = require('./models/user');
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
 
 const PORT = process.env.PORT || 3000;
 
@@ -18,6 +20,17 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.static('public'));
+
+// Configurar el middleware de sesión con connect-mongo
+app.use(session({
+    secret: 'mysecret', // Cambia esto por una cadena secreta segura
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({
+        mongoUrl: 'mongodb://localhost:27017/tresenraya',
+        collectionName: 'sessions'
+    })
+}));
 
 // Conectar a MongoDB
 mongoose.connect('mongodb://localhost:27017/tresenraya')
@@ -46,7 +59,7 @@ app.post("/login", async (req, res) => {
         if (!isMatch) {
             return res.render('login', { error: 'Usuario o contraseña incorrecto' });
         }
-
+        req.session.user=user;
         res.redirect('/juego');
     } catch (error) {
         console.error(error);
