@@ -6,6 +6,7 @@ const mongoose = require("mongoose")
 const User = require('./models/user');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
+const isAuthenticated = require('./middleware/auth');
 
 const PORT = process.env.PORT || 3000;
 
@@ -43,7 +44,7 @@ mongoose.connect('mongodb://localhost:27017/tresenraya')
 
 app.get("/login", (req, res) => {
     //res.sendFile(path.join(__dirname, 'public', 'login.html'));
-    let error = "";
+    const error = req.query.error || '';;
     res.render('login', { error });
 })
 
@@ -68,9 +69,6 @@ app.post("/login", async (req, res) => {
 
 })
 
-app.get("/juego", (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'juego.html'));
-})
 app.get("/register",(req,res)=>{
     let error="";
     res.render("register",{error}); 
@@ -85,6 +83,10 @@ app.post("/register", async (req, res) => {
     } catch (error) {      
         res.render("register",{error:"Error de conexion a bbdd"});
     }
+})
+
+app.get("/juego", isAuthenticated,(req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'juego.html'));
 })
 
 server.listen(PORT, () => {
