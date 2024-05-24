@@ -49,8 +49,8 @@ app.get("/juego", (req, res) => {
 })
 
 app.get("/newuser", async (req, res) => {
-    let name = "Lolo";
-    let email = "lolo@gmail.com";
+    let name = "Lolo2";
+    let email = "lolo2@gmail.com";
     let password = "1234";
     let usuario = new User({ name, email, password });
     try {
