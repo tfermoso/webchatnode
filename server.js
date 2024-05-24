@@ -34,14 +34,25 @@ app.get("/login", (req, res) => {
     res.render('login', { error });
 })
 
-app.post("/login", (req, res) => {
+app.post("/login", async (req, res) => {
     const { email, password } = req.body;
-    if (email == "admin@gmail.com" & password == "1234") {
-        res.redirect("/juego");
-    } else {
-        res.render('login', { error: 'Usuario o password incorrecta' });
+    try {
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.render('login', { error: 'Usuario o contraseña incorrecto' });
+        }
 
+        const isMatch = await user.comparePassword(password);
+        if (!isMatch) {
+            return res.render('login', { error: 'Usuario o contraseña incorrecto' });
+        }
+
+        res.redirect('/juego');
+    } catch (error) {
+        console.error(error);
+        res.render('login', { error: 'Error de conexion a la base de datos' });
     }
+
 })
 
 app.get("/juego", (req, res) => {
