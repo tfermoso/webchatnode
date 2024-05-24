@@ -56,10 +56,10 @@ app.post("/register", async (req, res) => {
     const {name,email,password}=req.body;
     let usuario = new User({ name, email, password });
     try {
-        usuario.save();
+        await usuario.save();
         res.redirect("/login");
     } catch (error) {      
-        res.render("register",{error});
+        res.render("register",{error:"Error de conexion a bbdd"});
     }
 })
 
