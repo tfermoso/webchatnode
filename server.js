@@ -2,6 +2,8 @@ const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
 const path = require('path');
+const mongoose=require("mongoose")
+
 
 const PORT = process.env.PORT || 3000;
 
@@ -16,6 +18,15 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.static('public'));
+
+// Conectar a MongoDB
+mongoose.connect('mongodb://localhost:27017/tresenraya')
+.then(() => {
+    console.log('Conectado a MongoDB');
+}).catch(err => {
+    console.error('Error al conectar a MongoDB', err);
+});
+
 
 app.get("/login", (req, res) => {
     //res.sendFile(path.join(__dirname, 'public', 'login.html'));
