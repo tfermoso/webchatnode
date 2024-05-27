@@ -46,12 +46,13 @@ io.on('connection', (socket) => {
         console.log("Nuevo cliente conectado" + socket.id);
         io.emit("mensaje","Nuevo cliente conectado");
 
-        
+
         socket.on('disconnect',()=>{
             console.log("Se ha desconectado un cliente")
         })
 
         socket.on('mensaje', (mensaje) => {
+            console.log(mensaje);
             io.emit('mensaje', mensaje);
         })
 })
