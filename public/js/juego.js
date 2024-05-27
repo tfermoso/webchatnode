@@ -1,7 +1,11 @@
 const socket = io();
+let connectedUsers=document.getElementById("connectedUsers");
 
 socket.on('mensaje', (datos) => {
-    console.log(datos);
+    const li = document.createElement('li');
+    li.textContent = datos._id +"-"+datos.name;
+    connectedUsers.appendChild(li);
+    //console.log(datos);
 })
 
 

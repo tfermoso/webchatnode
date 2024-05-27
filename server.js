@@ -49,7 +49,8 @@ io.use((socket,next)=>{
 
 io.on('connection', (socket) => {
         console.log("Nuevo cliente conectado" + socket.id);
-        io.emit("mensaje","Nuevo cliente conectado "+socket.request.session.user.name);
+        const {_id,name}=socket.request.session.user;
+        io.emit("mensaje",{_id,name});
 
 
         socket.on('disconnect',()=>{
