@@ -111,7 +111,7 @@ app.post("/register", async (req, res) => {
 
 app.get("/juego", isAuthenticated,(req, res) => {
     let {_id,name}=req.session.user;
-    res.render("juego",{_id,name});
+    res.render("juego",{user:{_id,name}});
 })
 
 server.listen(PORT, () => {
