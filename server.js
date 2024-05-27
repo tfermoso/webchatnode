@@ -51,16 +51,19 @@ io.use((socket,next)=>{
 io.on('connection', (socket) => {
         console.log("Nuevo cliente conectado" + socket.id);
         const {_id,name}=socket.request.session.user;
-        let idsocket=socket.id;
-        usuarios.push({_id,name,idsocket})
-        io.emit("mensaje",usuarios);
+        
+        usuarios.push({_id,name})
+        console.log(usuarios);
+        io.emit("usuarios",usuarios);
 
 
-        socket.on('disconnect',()=>{
-            console.log(usuarios)
-            usuarios = usuarios.filter(user => user.idsocket !== socket.id);
-            io.emit("mensaje",usuarios);
-        })
+        socket.on('disconnect', () => {
+            console.log("Se ha desconectado un cliente");
+
+            usuarios = usuarios.filter(user => user._id !== _id);
+            console.log(usuarios);
+            io.emit("usuarios", usuarios);
+        });
 
         socket.on('mensaje', (mensaje) => {
             console.log(mensaje);

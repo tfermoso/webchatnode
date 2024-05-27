@@ -1,7 +1,8 @@
 const socket = io();
 let connectedUsers = document.getElementById("connectedUsers");
 
-socket.on('mensaje', (datos) => {
+socket.on('usuarios', (datos) => {
+    connectedUsers.innerHTML="";
     datos.forEach(user => {
         if (!document.getElementById(user._id)) {
             const li = document.createElement('li');
