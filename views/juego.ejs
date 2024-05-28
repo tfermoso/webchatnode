@@ -6,7 +6,7 @@
             <div id="chatgeneral">
 
             </div>
-            <hr>    
+            <hr>
             <h3>Mensajes privados</h3>
             <div id="chatprivado">
 
@@ -17,7 +17,13 @@
             <ul class="list-group" id="connectedUsers"></ul>
             <hr>
             <h4>Partidas Pendientes</h4>
-            <ul class="list-group" id="partidasPendientes"></ul>
+            <ul class="list-group" id="partidasPendientes">
+                <% for(let i=0; i < partidas.length; i++) { %>
+                    <li id="<%= partidas[i]._id %>" class="list-group-item">
+                        <%= partidas[i].player1 %>
+                    </li>
+                    <% } %>
+            </ul>
         </div>
     </div>
 
@@ -27,6 +33,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+
     </body>
 
     </html>

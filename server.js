@@ -137,9 +137,12 @@ app.post("/register", async (req, res) => {
     }
 })
 
-app.get("/juego", isAuthenticated,(req, res) => {
+app.get("/juego", isAuthenticated,async (req, res) => {
     let {_id,name}=req.session.user;
-    res.render("juego",{user:{_id,name}});
+    let player2=_id;
+    let estado='pendiente';
+    let partidas=await Partida.find({player2,estado});
+    res.render("juego",{user:{_id,name},partidas});
 })
 
 server.listen(PORT, () => {
