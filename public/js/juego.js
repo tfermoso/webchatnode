@@ -3,6 +3,12 @@ let connectedUsers = document.getElementById("connectedUsers");
 socket.on('pendientes', (datos) => {
     console.log(datos);
 })
+
+socket.on('mensaje',(datos)=>{
+    const p = document.createElement('p');
+     p.innerText= datos.name+": "+datos.mensaje;
+     document.getElementById("chatgeneral").appendChild(p);
+})
 socket.on('usuarios', (datos) => {
     connectedUsers.innerHTML = "";
     datos.forEach(user => {
@@ -26,5 +32,6 @@ socket.on('usuarios', (datos) => {
 
 document.getElementById("btnEnviar").onclick = () => {
     let texto = document.getElementById("texto").value;
+    document.getElementById("texto").value="";
     socket.emit("mensaje", texto);
 }

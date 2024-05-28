@@ -68,7 +68,10 @@ io.on('connection', (socket) => {
 
         socket.on('mensaje', (mensaje) => {
             console.log(mensaje);
-            socket.broadcast.emit('mensaje', mensaje);
+            const usermensaje={_id,name,mensaje}
+            //socket.broadcast.emit('mensaje', usermensaje);
+            io.emit('mensaje', usermensaje);
+
         })
 
         socket.on('invitaciones',(datos)=>{
