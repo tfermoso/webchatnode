@@ -24,9 +24,13 @@ socket.on('usuarios', (datos) => {
             li.textContent = user.name;
             li.classList.add('list-group-item');
             li.onclick = (e) => {
-                
-                alert(e.currentTarget.id)
-                socket.emit("invitaciones", e.currentTarget.id);
+                let datos={
+                    userId:e.target.dataset.id,
+                    socketID:e.currentTarget.id,
+                    name:e.currentTarget.innerHTML
+                }
+                console.log(datos)
+                socket.emit("invitaciones", datos);
             }
             connectedUsers.appendChild(li);
         }
