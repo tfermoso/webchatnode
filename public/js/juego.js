@@ -9,6 +9,11 @@ socket.on('mensaje',(datos)=>{
      p.innerText= datos.name+": "+datos.mensaje;
      document.getElementById("chatgeneral").appendChild(p);
 })
+socket.on('privados',(datos)=>{
+    const p = document.createElement('p');
+     p.innerText= datos;
+     document.getElementById("chatprivado").appendChild(p);
+})
 socket.on('usuarios', (datos) => {
     connectedUsers.innerHTML = "";
     datos.forEach(user => {

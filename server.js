@@ -75,7 +75,7 @@ io.on('connection', (socket) => {
         })
 
         socket.on('invitaciones',(datos)=>{
-            io.to(datos).emit("pendientes","Invitación de "+socket.id)
+            io.to(datos).emit("privados","Invitación pendiente de "+name)
         })
 
         
