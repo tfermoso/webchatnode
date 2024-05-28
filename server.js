@@ -76,7 +76,7 @@ io.on('connection', (socket) => {
         })
 
         socket.on('invitaciones', async (datos)=>{
-           let player1="player1";
+           let player1=_id;
            let player2="player2";
 
             let partida = new Partida({ player1,player2 });

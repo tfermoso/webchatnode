@@ -20,9 +20,11 @@ socket.on('usuarios', (datos) => {
         if (!document.getElementById(user._id)) {
             const li = document.createElement('li');
             li.id = user.socketId;
+            li.setAttribute('data-id', user._id); 
             li.textContent = user.name;
             li.classList.add('list-group-item');
             li.onclick = (e) => {
+                
                 alert(e.currentTarget.id)
                 socket.emit("invitaciones", e.currentTarget.id);
             }
