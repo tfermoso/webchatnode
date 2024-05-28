@@ -80,7 +80,7 @@ io.on('connection', (socket) => {
            let player2=datos.userId;
            let estado='pendiente';
 
-            let partida = new Partida({ player1,player2,pendiente });
+            let partida = new Partida({ player1,player2,estado });
             try {
                 await partida.save();
                 io.to(datos.socketID).emit("privados","Invitación pendiente de "+name)
