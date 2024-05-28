@@ -4,6 +4,7 @@ const socketIo = require('socket.io');
 const path = require('path');
 const mongoose = require("mongoose")
 const User = require('./models/user');
+const Partida = require('./models/partida');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const isAuthenticated = require('./middleware/authenticated');
@@ -74,8 +75,18 @@ io.on('connection', (socket) => {
 
         })
 
-        socket.on('invitaciones',(datos)=>{
-            io.to(datos).emit("privados","Invitación pendiente de "+name)
+        socket.on('invitaciones', async (datos)=>{
+           let player1="player1";
+           let player2="player2";
+
+            let partida = new Partida({ player1,player2 });
+            try {
+                await partida.save();
+                io.to(datos).emit("privados","Invitación pendiente de "+name)
+                console.log(partida)
+            } catch (error) {      
+               console.log(error)
+            }
         })
 
         
