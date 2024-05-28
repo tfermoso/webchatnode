@@ -1,13 +1,20 @@
 const socket = io();
 let connectedUsers = document.getElementById("connectedUsers");
-
+socket.on('pendientes', (datos) => {
+    console.log(datos);
+})
 socket.on('usuarios', (datos) => {
-    connectedUsers.innerHTML="";
+    connectedUsers.innerHTML = "";
     datos.forEach(user => {
         if (!document.getElementById(user._id)) {
             const li = document.createElement('li');
-            li.id = user._id;
+            li.id = user.socketId;
             li.textContent = user.name;
+            li.classList.add('list-group-item');
+            li.onclick = (e) => {
+                alert(e.currentTarget.id)
+                socket.emit("invitaciones", e.currentTarget.id);
+            }
             connectedUsers.appendChild(li);
         }
     });

@@ -52,16 +52,17 @@ io.on('connection', (socket) => {
         console.log("Nuevo cliente conectado" + socket.id);
         const {_id,name}=socket.request.session.user;
         
-        usuarios.push({_id,name})
-        console.log(usuarios);
+        usuarios.push({_id,name,socketId:socket.id})
+        //console.log(usuarios);
         io.emit("usuarios",usuarios);
+
 
 
         socket.on('disconnect', () => {
             console.log("Se ha desconectado un cliente");
 
             usuarios = usuarios.filter(user => user._id !== _id);
-            console.log(usuarios);
+            //console.log(usuarios);
             io.emit("usuarios", usuarios);
         });
 
@@ -69,6 +70,12 @@ io.on('connection', (socket) => {
             console.log(mensaje);
             socket.broadcast.emit('mensaje', mensaje);
         })
+
+        socket.on('invitaciones',(datos)=>{
+            io.to(datos).emit("pendientes","Invitación de "+socket.id)
+        })
+
+        
 })
 
 
